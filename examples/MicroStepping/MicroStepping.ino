@@ -12,20 +12,19 @@
 
 // Motor steps per revolution. Most steppers are 200 steps or 1.8 degrees/step
 #define MOTOR_STEPS 200
-#define RPM 120
+#define RPM 6
 
 #define DIR 8
 #define STEP 9
-#define ENABLE 13 // optional (just delete ENABLE from everywhere if not used)
 
 /*
  * Choose one of the sections below that match your board
  */
 
-#include "DRV8834.h"
-#define M0 10
-#define M1 11
-DRV8834 stepper(MOTOR_STEPS, DIR, STEP, ENABLE, M0, M1);
+//#include "DRV8834.h"
+//#define M0 10
+//#define M1 11
+//DRV8834 stepper(MOTOR_STEPS, DIR, STEP, ENABLE, M0, M1);
 
 // #include "A4988.h"
 // #define MS1 10
@@ -46,6 +45,12 @@ DRV8834 stepper(MOTOR_STEPS, DIR, STEP, ENABLE, M0, M1);
 // #define TRQ1 7
 // DRV8880 stepper(MOTOR_STEPS, DIR, STEP, ENABLE, M0, M1, TRQ0, TRQ1);
 
+#include "MP6500.h"
+#define M0 10
+#define M1 11
+#define TRQ0 6
+MP6500 stepper(MOTOR_STEPS, DIR, STEP, M0, M1, TRQ0);
+
 // #include "BasicStepperDriver.h" // generic
 // BasicStepperDriver stepper(DIR, STEP);
 
@@ -54,6 +59,8 @@ void setup() {
      * Set target motor RPM.
      */
     stepper.begin(RPM);
+    stepper.setCurrent(1.0);
+    stepper.setMicrostep(8);
     stepper.enable();
     
     // set current level (for DRV8880 only). 
