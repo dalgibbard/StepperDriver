@@ -64,8 +64,8 @@ short MP6500::setMicrostep(short microsteps){
             digitalWrite(m1, HIGH);
             break;
         case 8:
-            digitalWrite(m0, LOW);
-            digitalWrite(m1, );
+            digitalWrite(m0, HIGH);
+            digitalWrite(m1, HIGH);
             break;
     }
     return this->microsteps;
