@@ -83,7 +83,7 @@ void MP6500::setCurrent(float amps){
     pinMode(trq0, OUTPUT);
     // map PWM 0% = 2.2amps, PWM 70%+ = 0 amps (on 5v boards- on 3.3v boards, PWM for 0amps is 100%)
     //      0% = write(0)           (255/100)*70 = write(178.5+) // opted for 180 here.
-    int bigamps = amps * 100 // gives better resolution in the mapping.
+    int bigamps = amps * 100; // gives better resolution in the mapping.
     int pwmcycle = map(bigamps, 0, 220, 180, 0); //220 is 2.2amps (max) * 100 to match input for better scaling.
     analogWrite(trq0, pwmcycle);
 }
